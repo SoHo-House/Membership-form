@@ -183,7 +183,13 @@
     document.getElementById('city').addEventListener('input', allowAlphabets);
     document.getElementById('country').addEventListener('input', allowAlphabets);
     document.getElementById('gender').addEventListener('input', allowAlphabets);
-    document.getElementById('pronouns').addEventListener('input', allowAlphabets);
+    
+    document.getElementById('pronouns').addEventListener('input', function(event) {
+    var input = event.target;
+    var inputValue = input.value.replace(/[^a-zA-Z/]/g, ''); // Allow alphabetic characters and "/"
+    input.value = inputValue;
+});   
+
 
     document.getElementById('dob').addEventListener('input', function(event) {
         var input = event.target;
@@ -201,28 +207,29 @@
     });
 
     document.getElementById('register-button').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default form submission behavior
- var inputs = document.querySelectorAll('input[type="text"], input[type="date"], input[type="tel"], input[type="email"]');
-        var valid = true;
-        inputs.forEach(function(input) {
-            if (!input.value) {
-                valid = false;
-                input.classList.add('error');
-            } else {
-                input.classList.remove('error');
-            }
-        });
-
-        if (!valid) {
-            alert('Please fill in all required fields.');
+    event.preventDefault(); // Prevent default form submission behavior
+    var inputs = document.querySelectorAll('input[type="text"], input[type="date"], input[type="tel"], input[type="email"]');
+    var valid = true;
+    inputs.forEach(function(input) {
+        if (!input.value) {
+            valid = false;
+            input.classList.add('error');
         } else {
-            redirectToUrl(); // Redirect only if the form is valid
+            input.classList.remove('error');
         }
     });
 
-    function redirectToUrl() {
-        window.location.href = 'https://soho-house.github.io/Successful/'; // Replace 'https://example.com' with your desired URL
+    if (!valid) {
+        alert('Please fill in all required fields.');
+    } else {
+        setTimeout(redirectToUrl, 3000); // Delay redirection by 3 seconds if the form is valid
     }
+});
+
+function redirectToUrl() {
+    window.location.href = 'https://soho-house.github.io/Successful/'; // Replace 'https://example.com' with your desired URL
+}
+
 </script> 
   <footer> 
    <div class="footer-container"> <a href="https://www.sohohouse.com/en-us/terms-and-policies">Terms of Policies</a> <a href="https://www.sohohouse.com/en-us/careers">Careers</a> <a href="https://www.sohohouse.com/en-us/contact">Contact</a> <a href="https://www.sohohouse.com/download"></a>Download App <a href="https://www.sohohouse.com/en-us/projects">Projects</a> <a href="https://www.instagram.com/sohohouse/">@SohoHouse</a> <a href="https://www.sohohouse.com/about">About</a> 
